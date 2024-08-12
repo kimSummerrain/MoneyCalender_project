@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Payment</title>
+  <link rel="stylesheet" href="addpayment.css">
+</head>
+<body>
+<h1>Add Payment</h1>
+
+<form id="paymentForm" action="/api/places/add" method="post">
+  <label for="placeName">Place Name:</label>
+  <input type="text" id="placeName" name="placeName" required><br><br>
+
+  <label for="price">Price:</label>
+  <input type="number" id="price" name="price" step="0.01" required><br><br>
+
+  <button type="submit">Add Payment</button>
+
+  <button type="button" class="navyBtn" onClick="location.href='paymentBoard.html'">Go to board</button>
+
+</form>
+
+
+
+</body>
+
+</html>

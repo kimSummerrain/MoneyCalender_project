@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payments Board</title>
+    <link rel="stylesheet" href="paymentBoard.css">
+</head>
+<body>
+<h1>Payments Board</h1>
+<button type="button" class="navyBtn" onClick="location.href='addpayment.html'">Go to AddPayment</button>
+
+<table id="paymentsTable">
+    <thead>
+    <tr>
+        <th>Time</th>
+        <th>Place Name</th>
+        <th>Place Type</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody id="tableBody">
+    <!-- Placeholder for rows, will be populated dynamically -->
+    </tbody>
+</table>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/api/places/all')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('tableBody');
+                data.forEach(paymentEntity => {
+                    const row = document.createElement('tr');
+
+                    const timeCell = document.createElement('td');
+                    timeCell.textContent = new Date(paymentEntity.dateTime).toLocaleString();
+                    row.appendChild(timeCell);
+
+                    const nameCell = document.createElement('td');
+                    nameCell.textContent = paymentEntity.placeName;
+                    row.appendChild(nameCell);
+
+                    const typeCell = document.createElement('td');
+                    typeCell.textContent = paymentEntity.category;
+                    row.appendChild(typeCell);
+
+                    const priceCell = document.createElement('td');
+                    priceCell.textContent = paymentEntity.price.toFixed(2);
+                    row.appendChild(priceCell);
+
+                    tableBody.appendChild(row);
+                });
+            });
+    });
+</script>
+
+</body>
+</html>
