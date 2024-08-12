@@ -1,10 +1,9 @@
 package com.example.MoneyCalender_project.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -12,9 +11,13 @@ public class PaymentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String time;
+    private LocalDateTime dateTime;
     private String placeName;
-    private String placeType;
+    private String category;
     private double price;
+
+    @PrePersist
+    protected void onCreate() {
+        this.dateTime = LocalDateTime.now();
+    }
 }
